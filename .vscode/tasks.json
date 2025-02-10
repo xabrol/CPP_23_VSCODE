@@ -34,34 +34,6 @@
       }
     },
     {
-      "label": "Build Windows Debug",
-      "type": "shell",
-      "command": "cmake",
-      "args": ["--build", "--preset", "windows-debug"],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "panel": "shared"
-      }
-    },
-    {
-      "label": "Build Windows Release",
-      "type": "shell",
-      "command": "cmake",
-      "args": ["--build", "--preset", "windows-relase"],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "panel": "shared"
-      }
-    },
-    {
       "label": "CMake: Show-> Build Directory",
       "type": "shell",
       "command": "echo Build Dir: ${command:cmake.buildDirectory}",

@@ -13,6 +13,16 @@ cmake_policy(SET CMP0048 NEW)  # Project version in project() command
 cmake_policy(SET CMP0077 NEW)  # Option() honors normal variables
 cmake_policy(SET CMP0155 NEW)  # Enable new CMake module support behavior
 
+# Force Clang as the compiler
+set(CMAKE_C_COMPILER clang CACHE STRING "C Compiler")
+set(CMAKE_CXX_COMPILER clang++ CACHE STRING "C++ Compiler")
+
+# Check if Clang is available
+execute_process(COMMAND ${CMAKE_CXX_COMPILER} --version OUTPUT_VARIABLE CLANG_VERSION ERROR_QUIET)
+if(NOT CLANG_VERSION MATCHES "clang")
+    message(FATAL_ERROR "Clang is required but not found. Please install Clang and try again.")
+endif()
+
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API "TRUE") # Enables proper module handling in CMake

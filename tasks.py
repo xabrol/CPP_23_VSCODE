@@ -121,7 +121,7 @@ def build_all(c, clean=False):
     if clean:
         nuke(c)
     configure_all(c, clean)
-    platformValues = get_platform_values()    
+    platformValues = get_platform_values()
     for os in platformValues:
         for build_type in ["debug", "release"]:
             presetName = f"{os.lower()}-{build_type}"
@@ -130,4 +130,8 @@ def build_all(c, clean=False):
             cmd.append(f"--build")
             cmd.append(f"--preset {presetName}")
             c.run(" ".join(cmd))
-            
+
+
+@task
+def show_host_os(c):
+    print(f"Host OS: {get_host_os()}")
