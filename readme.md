@@ -104,6 +104,11 @@ invoke build-all
 
 # Notes
 
+Currently this code is outputting to build/platform/debug|release which messes up clangd vscode settings, so you'll need to manually update the path in .vscode/settings in clangd.args to /linux or /windows debug respectively depending on your host os.
+
+I will remove the platform code so it's platform agnostic and just does build/debug and build/release and then rely on conan runners for cross compiling.
+
+---
 At this point you should be able to build.  Tasks are already setup in vscode for this if you use "run task" in the command pallet or via better status bar (recommended extension) you can do conan install and builds from tasks.
 
 But also, CMake tools automatically picks up the build commands for debug and release so the run/debug buttons in vscode should just automatically work.  But we can add launch.json entries to do the builds to which give you more options for run/debug menu in vscode.

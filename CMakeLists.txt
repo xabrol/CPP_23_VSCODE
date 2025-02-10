@@ -19,6 +19,7 @@ set(CMAKE_CXX_COMPILER clang++ CACHE STRING "C++ Compiler")
 
 # Check if Clang is available
 execute_process(COMMAND ${CMAKE_CXX_COMPILER} --version OUTPUT_VARIABLE CLANG_VERSION ERROR_QUIET)
+message(STATUS "Found Clang: ${CMAKE_CXX_COMPILER} ${CLANG_VERSION}")
 if(NOT CLANG_VERSION MATCHES "clang")
     message(FATAL_ERROR "Clang is required but not found. Please install Clang and try again.")
 endif()
@@ -27,16 +28,31 @@ endif()
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API "TRUE") # Enables proper module handling in CMake
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Ensure your compiler supports C++ modules
-if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    add_compile_options(/experimental:module)
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    add_compile_options(-fmodules)
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    # GCC's module support is still experimental
-    add_compile_options(-fmodules-ts)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    message(STATUS "Configuring Clang 19 with C++20 modules enabled")
+
+    add_compile_options(
+        -fmodules
+        -fimplicit-modules
+        -fimplicit-module-maps
+        -Xclang -emit-module-interface
+    )
+
+    add_link_options(
+        -fmodules
+        -fimplicit-modules
+        -fimplicit-module-maps
+    )
+
+    # Ensure Clang can find its own precompiled modules
+    find_program(CLANG_SCAN_DEPS NAMES clang-scan-deps-19 clang-scan-deps)
+    if(NOT CLANG_SCAN_DEPS)
+        message(FATAL_ERROR "clang-scan-deps-19 not found! Install clang-tools-19.")
+    endif()
+    set(CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS "${CLANG_SCAN_DEPS}" CACHE STRING "Path to Clang's module dependency scanner")
 endif()
 
 #https://cmake.org/cmake/help/latest/command/project.html

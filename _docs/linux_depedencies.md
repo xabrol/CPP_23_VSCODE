@@ -9,24 +9,27 @@ sudo apt install build-essential linux-headers-$(uname -r) valgrind git wget cur
 ```
 
 
-## 2. Install LLVM via sh script
+## 2. Install Clang19, Clangd19, clang-tools-19
 
 ```
-wget https://apt.llvm.org/llvm.sh
-chmod +x llvm.sh
-sudo ./llvm.sh 19.1.7
+sudo apt-get update
+sudo apt-get install clang-19 clangd-19 clang-tools-19
 ```
 
-Set alternatives for clang 19
+Set Alternatives
+
+> assuming this is where your clang-19 files installed
 
 ```
-sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-19 100
-sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-19 100
+sudo update-alternatives --install /usr/bin/clang   clang   /usr/lib/llvm-19/bin/clang   100
+sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/lib/llvm-19/bin/clang++ 100
+sudo update-alternatives --install /usr/bin/clangd  clangd  /usr/lib/llvm-19/bin/clangd  100
+
 sudo update-alternatives --config clang
 sudo update-alternatives --config clang++
+sudo update-alternatives --config clangd
 ```
-
-> Note: the conan profile for linux in this project expects clang-19 and clang++-19 in /usr/bin, the llvm sh install script does that for you.  Conan will not be able to generate the cmake/presets and build files if clang 19 is not in /usr/bin, if it's elsewhere you need to update the profile in profiles/linux_host
+That puts clang 19 as the current clang, clang++, clangd commands
 
 Check and verify clang in path is version 19
 

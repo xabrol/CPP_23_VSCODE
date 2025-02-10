@@ -1,7 +1,7 @@
 {
   "C_Cpp.intelliSenseEngine": "disabled",
   "clangd.arguments": [
-    "--compile-commands-dir=${workspaceFolder}/build/Windows/Debug",
+    "--compile-commands-dir=${workspaceFolder}/build/Linux/Debug",
     "--clang-tidy",
     "--clang-tidy-checks=*"
   ],
