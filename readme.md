@@ -1,35 +1,114 @@
 > Note: This git project is an example of working with c++23 and c++23 standard modules assuming the following:
-> * You are developing on windows as your host OS
-> * You have all the build requirements installed
+> * You are developing on windows or a debian based linux distro as your build host
+> * You have all the build requirements installed for the relevant build host
 > * You are using VSCode and have the necessary extensions installed
 
-# Working with C++ 23 on Windows 10 and 11
-> * Windows 10 requires at least version 2004 (Build 19041)
-> * Windows 11 requires at least version 22000 aka 21H2, 22000.194
-> * **i.e. Just have windows 10 or 11 up to date and you should be good to go**
+# Windows Users - (Building and Developing ON windows)
 
-# Build Dependencies
+[Review the depedencies you need to install](./_docs/windows_depedencies.md)
 
-> For ease of this exmaple repo, everything assumes all of these will be installed and put in the system/user path where applicable, i.e. cmake, clangcl, msvc, etc
+# Debian Based Linux Users  - (Building and Developing ON a Debian Based Linux Distro)
 
-## Depedency List (install all of these)
+[Review the dependencies you need to install](./_docs/linux_depedencies.md)
 
-| Name | Install Url |
-|------|-------------|
-| Powershell 7.5 | https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5 |
-| WSL2 | [Install WSL2 Guide](./_docs/WSL2_Install_Guide.md) |
-| Docker | https://docs.docker.com/desktop/setup/install/windows-install |
-|| Docker is used for cross compiling with conan 2 runners, so it's necessary |
-| Git SCM | https://git-scm.com/downloads/win |
-| CMake | https://cmake.org/download/ |
-|| **version 3.31.5 or better (get the latest under binary distributions)** |
-| LLVM CLANG | https://github.com/llvm/llvm-project/releases |
-|| Get the latest (non prerelease) LLVM-XX.X.X-win64.exe under assets |
-|| I.e https://github.com/llvm/llvm-project/releases/download/llvmorg-19.1.7/LLVM-19.1.7-win64.exe |
-| Ninja-Build | **Install via winget** | 
-|| ```winget install Ninja-build.Ninja```|
-| MS Build Tools | [Refer to this guide](./_docs/MSBuildTools_Install_Guide.md)
-| Python Version Manager | https://github.com/pyenv-win/pyenv-win |
+## 1. Clone the Project
 
+> Assume you know how to use git and ssh keys on windows/linux
 
-## Clone the Project
+```
+git clone git@github.com:xabrol/WINHOST_CPP_23_VSCODE.git
+```
+
+## 2. Open the project in vscode
+
+## 3. Install recommended VSCode extensions
+
+You should get a popup to install the recomended extensions, but if not you can find them in the .vscode/extensions.json file in the project.
+
+The following extensions are required for llvm/clang/clangd development in vscode
+
+```      
+      "ms-vscode.cpptools",
+      "ms-vscode.cpptools-extension-pack",
+      "xaver.clang-format",
+      "llvm-vs-code-extensions.vscode-clangd",
+      "twxs.cmake",
+      "ms-vscode.cmake-tools",      
+```
+
+The following extensions are further highly recommended
+
+```
+    "ms-python.black-formatter",
+    "ms-azuretools.vscode-docker",
+    "editorconfig.editorconfig",
+    "shd101wyy.markdown-preview-enhanced",
+    "esbenp.prettier-vscode",
+    "ms-python.vscode-pylance",
+    "ms-python.python",
+    "ms-python.debugpy",
+    "ms-vscode-remote.remote-wsl",
+    "robertostermann.better-status-bar"    
+```
+
+> ** Note: The cpp intellisense engine conflicts with clangd, so it has to be turned off in vscode settings, this project already does that for you in .vscode/settings ** 
+
+# Use the integrated terminal from here on out in vscode
+
+## 4. Install python 3.11
+
+```
+pyenv install 3.11
+```
+
+## 5. Create the python virtual env
+
+```
+pyenv local 3.11
+python -m venv .venv
+```
+
+Source into python
+
+### On Linux
+
+```
+source ./.venv/bin/activate
+```
+
+### On Windows
+
+```
+"./.venv/scripts/activate"
+```
+
+## 6. Install Python requirements
+
+```
+pip install -r requirements.txt
+```
+
+## 7. Run invoke to install conan and do cmake configures
+
+```
+invoke configure-all
+```
+
+## 8. Try building everything
+
+```
+invoke build-all
+```
+
+---
+
+# Notes
+
+At this point you should be able to build.  Tasks are already setup in vscode for this if you use "run task" in the command pallet or via better status bar (recommended extension) you can do conan install and builds from tasks.
+
+But also, CMake tools automatically picks up the build commands for debug and release so the run/debug buttons in vscode should just automatically work.  But we can add launch.json entries to do the builds to which give you more options for run/debug menu in vscode.
+
+If you use "debug" looks like a debug, you should be able to breakpoint and step through the example program in src/example
+
+More docs comming if needed, this repo is a work in progress.
+
