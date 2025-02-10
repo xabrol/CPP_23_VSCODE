@@ -100,6 +100,13 @@ invoke configure-all
 invoke build-all
 ```
 
+## 9. Fix Clangd.Path if on linux or wsl2 remote
+
+set clangd.path in vscode settings on linux to: /usr/lib/llvm-19/bin/clangd
+
+without that, vscode will use the built in clangd from the vscode clangd extension and it is always behind the latest stable llvm on linux repos.
+
+If vscode is using a different clangd thant clang it won't be able to give you intellisense on modules because it's security refuses to trust modules build by a different version of clang than clangd.
 ---
 
 # Notes
