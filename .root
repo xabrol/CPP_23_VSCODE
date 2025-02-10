@@ -1,0 +1,2 @@
+#root files, used for file nesting in vscode.
+#controlled by .vscode/settings.json in the explorer.fileNesting.patterns setting in the .root entry.

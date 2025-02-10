@@ -1,0 +1,21 @@
+{
+    "recommendations": [
+      "ms-python.black-formatter",
+      "ms-vscode.cpptools",
+      "ms-vscode.cpptools-extension-pack",
+      "xaver.clang-format",
+      "llvm-vs-code-extensions.vscode-clangd",
+      "twxs.cmake",
+      "ms-vscode.cmake-tools",
+      "ms-azuretools.vscode-docker",
+      "editorconfig.editorconfig",
+      "shd101wyy.markdown-preview-enhanced",
+      "esbenp.prettier-vscode",
+      "ms-python.vscode-pylance",
+      "ms-python.python",
+      "ms-python.debugpy",
+      "ms-vscode-remote.remote-wsl",
+      "robertostermann.better-status-bar"
+    ],    
+  }
+  

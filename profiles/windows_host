@@ -1,0 +1,9 @@
+[settings]
+os=Windows
+arch=x86_64
+compiler=clang
+compiler.version=19
+compiler.cppstd=23
+
+[conf]
+tools.info.package_id:confs=["tools.cmake.cmake_layout:build_folder_vars"]

@@ -1,0 +1,7 @@
+**/[Bb][Uu][Ii][Ll][Dd]/
+**/[Bb][Ii][Nn]/
+**/node_modules/
+**/.venv/
+pyvenv.cfg
+**/__pycache__/
+CMakeUserPresets.json
