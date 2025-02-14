@@ -23,5 +23,5 @@
 || I.e https://github.com/llvm/llvm-project/releases/download/llvmorg-19.1.7/LLVM-19.1.7-win64.exe |
 | Ninja-Build | **Install via winget** | 
 || ```winget install Ninja-build.Ninja```|
-| MS Build Tools | [Refer to this guide](./_docs/MSBuildTools_Install_Guide.md)
+| MS Build Tools | [Refer to this guide](./MSBuildTools_Install_Guide.md)
 | Python Version Manager | https://github.com/pyenv-win/pyenv-win |
